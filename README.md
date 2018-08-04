@@ -1,5 +1,5 @@
 # StonePaperScissors
 Code for Rock Paper Scissors
 
-#Description
+# Description
 the game teaches itself how to win!
