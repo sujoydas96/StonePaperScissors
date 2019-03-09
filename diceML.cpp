@@ -2,157 +2,185 @@
 #include<conio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<string>
 
 using namespace std;
 
-int c1=0,c2=0,c3=0;
-string x1,x2,x3;
+void check(string inp,string answer)
+{
+    if(inp.compare("Rock")==0)
+    {
+        for(int i=0;i<3;i++)
+        {
+            if(answer.compare("Rock")==0)
+            {
+                ans[0][i]=ans[0][i]+1;
+                if(var<=100)
+                {
+                    ans[0][i]=ans[0][i]-1;
+                    ans[0][i]=ans[0][i]-1; 
+                }
+            }
+            else if(answer.compare("Paper")==0)
+            {
+                ans[0][i]=ans[0][i]+1;
+                if(var<=100)
+                {
+                    ans[0][i]=ans[0][i]-1;
+                    ans[0][i]=ans[0][i]-1; 
+                }
+            }
+            else if(answer.compare("Scissors")==0)
+            {
+                ans[0][i]=ans[0][i]+1;
+                if(var<=100)
+                {
+                    ans[0][i]=ans[0][i]-1;
+                    ans[0][i]=ans[0][i]-1; 
+                }
+            }
+            
+        }
+    }
 
-int reinforce(string,string);
-int mind(string);
+    if(inp.compare("Paper")==0)
+    {
+       for(int i=0;i<3;i++)
+        {
+            if(answer.compare("Rock")==0)
+            {
+                ans[1][i]=ans[1][i]+1;
+                if(var<=100)
+                {
+                    ans[1][i]=ans[1][i]-1;
+                    ans[1][i]=ans[1][i]-1; 
+                }
+            }
+            else if(answer.compare("Paper")==0)
+            {
+                ans[1][i]=ans[1][i]+1;
+                if(var<=100)
+                {
+                    ans[1][i]=ans[1][i]-1;
+                    ans[1][i]=ans[1][i]-1; 
+                }
+            }
+            else if(answer.compare("Scissors")==0)
+            {
+                ans[1][i]=ans[1][i]+1;
+                if(var<=100)
+                {
+                    ans[1][i]=ans[1][i]-1;
+                    ans[1][i]=ans[1][i]-1; 
+                }
+            }
+            
+        } 
+    }
 
+    if(inp.compare("Scissors")==0)
+    {
+       for(int i=0;i<3;i++)
+        {
+            if(answer.compare("Rock")==0)
+            {
+                ans[2][i]=ans[2][i]+1;
+                if(var<=100)
+                {
+                    ans[2][i]=ans[2][i]-1;
+                    ans[2][i]=ans[2][i]-1; 
+                }
+            }
+            else if(answer.compare("Paper")==0)
+            {
+                ans[2][i]=ans[2][i]+1;
+                if(var<=100)
+                {
+                    ans[2][i]=ans[2][i]-1;
+                    ans[2][i]=ans[2][i]-1; 
+                }
+            }
+            else if(answer.compare("Scissors")==0)
+            {
+                ans[2][i]=ans[2][i]+1;
+                if(var<=100)
+                {
+                    ans[2][i]=ans[2][i]-1;
+                    ans[2][i]=ans[2][i]-1; 
+                }
+            }
+            
+        } 
+    }
+    
+var++;    
+}
+
+string GenAnswer(int i)
+{
+    if(i==0)return "Rock";
+    else if(i==1)return "Paper";
+    else if(i==2)return "Scissors";
+    else return "Error... Failed to generate Answer\n"; 
+}
+
+string result(string inp)//return the answer after computing the highest element in the row
+{   
+    int max;
+    int i=0;
+    string answer;
+    if(inp.compare("Rock")!=0)
+    {
+        max=ans[0][i];
+        for(i=0;i<3;i++)
+        {
+            if(max>ans[0][i]) max=ans[0][i];
+        }
+        answer=GenAnswer(i-1);
+    }
+    else if(inp.compare("Paper")!=0)
+    {
+        max=ans[1][i];
+        for(i=0;i<3;i++)
+        {
+            if(max>ans[1][i]) max=ans[1][i];
+        }
+        answer=GenAnswer(i-1);
+
+    }
+    else if(inp.compare("Scissors")!=0)
+    {
+        max=ans[2][i];
+        for(i=0;i<3;i++)
+        {
+            if(max>ans[2][i]) max=ans[2][i];
+        }
+        answer=GenAnswer(i-1);
+    }
+    else 
+    cout<<"Failed to Compute"<<endl;
+    check(inp,answer);
+}
+
+
+int ans[3][3];
+int var=0;
 int main()
 {
-    cout<<"Enter your Choice: Rock(R), Paper(P) or Scissors(S)"<<endl;
-    cout<<"Your answer: ";
-    string player;
-    getline(cin,player);
-    mind(player);
-    cout<<"PROCESSED....... Press any key to continue"<<endl;
-    getch();
-    system("CLS");
-    main();
-}
-
-int reinforce(string player,string comp)                                                            // The rules of winning the game
-{
-         if(player=="rock" && comp=="rock") return 0;
-    else if(player=="rock" && comp=="paper") return 1;
-    else if(player=="rock" && comp=="scissors") return 0;
-
-    else if(player=="paper" && comp=="rock") return 0;
-    else if(player=="paper" && comp=="paper") return 0;
-    else if(player=="paper" && comp=="scissors") return 1;
-
-    else if(player=="scissors" && comp=="rock") return 1;
-    else if(player=="scissors" && comp=="paper") return 0;
-    else if(player=="scissors" && comp=="scissors") return 0;
-}
-
-int mind(string player)
-{
-    string comp;
-
-    if(c1==1 && player=="rock")
-        {
-            comp=x1;
-        }
-    else if(c1==0 && player=="rock")
-        {
-            switch( rand()%3 ){
-                case 0 :
-                {
-                    comp="rock";
-                    c1=reinforce(player,comp);
-                    if(c1==1)
-                        x1="rock";
-
-                break;
-                }
-                case 1 :
-                {
-                    comp="paper";
-                    c1=reinforce(player,comp);
-                    if(c1==1)
-                        x1="paper";
-
-                    break;
-                }
-                case 2:
-                {
-                    comp="scissors";
-                    c1=reinforce(player,comp);
-                    if(c1==1)
-                        x1="scissors";
-
-                    break;
-                }
-                default: break;
-            }
-        }
-
-    else if(c2==1 && player=="paper")
+    string inp;
+    int a=0;
+    
+    //check function for checking the answers,
+    do
     {
-        comp=x2;
-
+        system("CLS");
+        cout<<"Your Turn:(Rock, Paper or Scissors) "<<endl;
+        getline(cin,inp);
+        cout<<"\nComputer output: "<<result(inp)<<endl;
+        cout<<"press 1 to continue again\n"<<endl;
+        cin>>a;
     }
-    else if(c2==0 && player=="paper")
-    {
-        switch( rand()%3 ){
-                case 0:
-                {
-                    comp="rock";
-                    c2=reinforce(player,comp);
-                    if(c2==1)
-                        x2="rock";
-                    break;
-                }
-                case 1:
-                {
-                    comp="paper";
-                    c2=reinforce(player,comp);
-                    if(c2==1)
-                        x2="paper";
-                    break;
-                }
-                case 2:
-                {
-                    comp="scissors";
-                    c2=reinforce(player,comp);
-                    if(c2==1)
-                        x2="scissors";
-                    break;
-                }
-                default: break;
-        }
-    }
-
-
-    else if(c3==1 && player=="scissors")
-    {
-        comp=x3;
-
-    }
-    else if(c3==0 && player=="scissors")
-    {
-        switch( rand()%3 ){
-                case 0:
-                {
-                    comp="rock";
-                    c3=reinforce(player,comp);
-                    if(c3==1)
-                        x3="rock";
-                    break;
-                }
-                case 1:
-                {
-                    comp="paper";
-                    c3=reinforce(player,comp);
-                    if(c3==1)
-                        x3="paper";
-                    break;
-                }
-                case 2:
-                {
-                    comp="scissors";
-                    c3=reinforce(player,comp);
-                    if(c3==1)
-                        x3="scissors";
-                    break;
-                }
-                default: break;
-        }
-    }
-
-cout<<"Computer's answer : "<< comp <<endl;
-}
+    while(a);
+return 0;
+}    
+    
