@@ -1,7 +1,10 @@
 #include<iostream>
-#include<stdlib.h>
+#include<conio.h>
 #include<string.h>
+#include<stdlib.h>
 #include<string>
+
+#define INITIAL 10
 
 using namespace std;
 
@@ -11,6 +14,7 @@ int var=0;
 const string Rock="Rock";
 const string Paper="Paper";
 const string Scissors="Scissors";
+
 
 void check(string inp,string answer);
 string GenAnswer(int i);
@@ -22,17 +26,18 @@ int main()
     int a=0;
    while(1)
    {
-        //system("CLS");
+        system("CLS");
         cout<<"\nYour Turn:(Rock, Paper or Scissors) "<<endl;
         getline(cin,inp);
         cout<<"\nComputer output: "<<result(inp)<<endl;
-        cout<<"\n\n\n";
+        cout<<"\n\n\nPress Enter to continue";
+        getch();
    }
 
-return 0;
+    return 0;
 }
 
-string result(string inp)//return the answer after computing the highest element in the row
+string result(string inp)
 {
     int max;
     int i=0;
@@ -44,11 +49,11 @@ string result(string inp)//return the answer after computing the highest element
         max=ans[0][i];
         for(i=0;i<3;i++)
         {
-            if(max<ans[0][i])
-            {
-               max=ans[0][i];
-               index=i;
-            }
+                if(max<ans[0][i])       //control index here
+                {
+                    max=ans[0][i];
+                    index=i;
+                }
         }
     }
     else if(inp.compare(Paper)==0)
@@ -88,7 +93,7 @@ string result(string inp)//return the answer after computing the highest element
     return answer;
 }
 
-string GenAnswer(int index)           //generates the answer for the function result().
+string GenAnswer(int index)           //generates the answer;
 {
     if(index==0)return Rock;
     else if(index==1)return Paper;
@@ -96,7 +101,7 @@ string GenAnswer(int index)           //generates the answer for the function re
     else return "Error... Failed to generate Answer\n";
 }
 //substraction important for better efficiency in the beginning
-void check(string inp,string answer)
+void check(string inp,string answer)            //checking table
 {
     if(inp.compare(Rock)==0)
     {
@@ -108,6 +113,8 @@ void check(string inp,string answer)
         else if(answer.compare(Paper)==0)
         {
             ans[0][1]=ans[0][1]+1;
+            ans[1][1]=ans[1][1]-1;
+            ans[2][1]=ans[2][1]-1;
             cout<<"\nComputer Wins\n"<<endl;
         }
         else if(answer.compare(Scissors)==0)
@@ -133,6 +140,8 @@ void check(string inp,string answer)
         else if(answer.compare(Scissors)==0)
         {
             ans[1][2]=ans[1][2]+1;
+            ans[2][2]=ans[2][2]-1;
+            ans[0][2]=ans[0][2]-1;
             cout<<"\nComputer Wins\n"<<endl;
         }
     }
@@ -143,6 +152,8 @@ void check(string inp,string answer)
         if(answer.compare(Rock)==0)
         {
             ans[2][0]=ans[2][0]+1;
+            ans[1][0]=ans[1][0]-1;
+            ans[0][0]=ans[0][0]-1;
             cout<<"\nComputer Wins\n"<<endl;
         }
         else if(answer.compare(Paper)==0)
@@ -157,5 +168,5 @@ void check(string inp,string answer)
         }
     }
 
-var++;
+    var++;
 }
